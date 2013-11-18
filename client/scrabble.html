@@ -18,17 +18,17 @@
     var client = makeScrabbleClient();
     
     function updateUI() {
-        var state = client.getState();
-        document.getElementById("tileRackLabel").innerHTML = state.tileRack;
-        document.getElementById("scoreLabel").innerHTML = state.score;
+        client.getState(function(state) {
+            document.getElementById("tileRackLabel").innerHTML = state.tileRack;
+            document.getElementById("scoreLabel").innerHTML = state.score;
+        });
     }
     updateUI();
     
     document.getElementById("playButton").onclick = function(event) {
         var word = document.getElementById("chosenTiles").value;
         word = word.toUpperCase();
-        client.play(word);
-        updateUI();
+        client.play(word, updateUI);
     }; 
     document.getElementById("giveUpButton").onclick = function(event) {
         document.location = "http://youtu.be/Rcav9fIkBjM"; 
