@@ -1,0 +1,37 @@
+<div>
+    Rack: <span id="tileRackLabel">BDFERTS</span>
+</div>
+
+<div>
+    <input type="text" id="chosenTiles">
+    <button id="playButton">Play</button>
+    <button id="giveUpButton">Give Up</button>
+</div>
+
+<div>
+    Score: <span id="scoreLabel">0</span>
+</div>
+
+<script src="scrabbleClient.js"></script>
+
+<script>
+    var client = makeScrabbleClient();
+    
+    function updateUI() {
+        var state = client.getState();
+        document.getElementById("tileRackLabel").innerHTML = state.tileRack;
+        document.getElementById("scoreLabel").innerHTML = state.score;
+    }
+    updateUI();
+    
+    document.getElementById("playButton").onclick = function(event) {
+        var word = document.getElementById("chosenTiles").value;
+        word = word.toUpperCase();
+        client.play(word);
+        updateUI();
+    }; 
+    document.getElementById("giveUpButton").onclick = function(event) {
+        document.location = "http://youtu.be/Rcav9fIkBjM"; 
+    };
+
+</script>
